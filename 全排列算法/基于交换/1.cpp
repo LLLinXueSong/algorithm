@@ -1,27 +1,30 @@
-#include <string>
-#include <iostream>
-using namespace std;
-string s = "ABC";
-string res;
-bool use[100];
-void Permute(string a,int begin,int end,string res){
-    if(begin == end){
-        cout<<res<<endl;
-        return;
-    }else{
-        for(int i = 0;i<end;i++){
-            if(!use[i]){
-                use[i] = true;
-                 res += s[i];
-                 Permute(a,begin+1,end,res);
-                 res.erase(res.length()-1);
-                 use[i] = false;
-            }
+class Solution {
+public:
+    void Permute(vector<int> &nums,vector<vector<int>> &result,int len){
+        if(len == nums.size()-1){
+                for(int i = 0;i<nums.size();i++){
+                    cout<<nums[i];
+                }
+                cout<<endl;
+            result.push_back(nums);
+            return;
+        }
+        for(int i = len; i<nums.size();i++){
+            int temp = nums[len];
+            nums[len] = nums[i];
+            nums[i] = temp;
+            Permute(nums,result,++len);
+            --len;
+            temp = nums[len];
+            nums[len] = nums[i];
+            nums[i] = temp;
         }
     }
-}
-int main(){
-    memset(use,0,sizeof(use));
-    Permute(s,0,s.length(),res);
-    return 0;
-}
+vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>> r1;
+        if(nums.size()<= 0) return r1;
+        Permute(nums,r1,0);
+        return r1;
+    }
+
+};
