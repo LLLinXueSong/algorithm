@@ -36,14 +36,13 @@ int getIndex(int a[],int low, int hig){
     int temp = a[low];
     while(low<hig){
          while(low<hig && a[hig]>=temp){
-        hig--;
-    }
-    a[low] = a[hig];
-    while(low<hig && a[low]<temp){
-        low++;
-    }
-    a[hig] = a[low];
-
+            hig--;
+        }
+        a[low] = a[hig];
+        while(low<hig && a[low]<temp){
+            low++;
+        }
+        a[hig] = a[low];
     }
     a[low] = temp;
     return low;
